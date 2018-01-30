@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <title>My First Angular App</title>
+</head>
+
+<body ng-controller='mainCtrl'>
+  <h1>
+    My Friends List:
+  </h1>
+  <input ng-model='input' placeholder="My New Best Friend" />
+
+  <input ng-model='search.name' placeholder="Filter Friends By Name" />
+  <input ng-model='search.gender' placeholder="Filter Friends By Gender" />
+
+  <button ng-click='addFriend(input)'>Add Friend</button>
+
+  <div ng-repeat="friend in friends | filter: search | orderBy: '+name' track by $index">
+    <div ng-class="{strike:clicked}">
+      {{ friend.name }}
+    </div>
+    <div class=''>
+      <button ng-click='removeFriend($index)'>Unfriend</button>
+      <button ng-hide='clicked' ng-click='clicked = !clicked'>Im not talking to you</button>
+      <button ng-show='clicked' ng-click='clicked = !clicked'>Ok you repented</button>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+  <script src='app.js'></script>
+  <script src='mainCtrl.js'></script>
+</body>
+
+</html>
